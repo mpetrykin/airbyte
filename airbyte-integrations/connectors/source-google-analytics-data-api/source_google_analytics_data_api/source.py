@@ -426,10 +426,6 @@ class SourceGoogleAnalyticsDataApi(AbstractSource):
             **config
         }
         report_class_tuple = (GoogleAnalyticsDataApiBaseStream,)
-        if dimension_filter:
-            stream_config["dimensionFilter"] = dimension_filter
-        if metric_filter:
-            stream_config["metricFilter"] = metric_filter
         if pivots:
             stream_config["pivots"] = pivots
             report_class_tuple = (PivotReport,)

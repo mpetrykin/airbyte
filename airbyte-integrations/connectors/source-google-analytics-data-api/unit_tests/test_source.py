@@ -111,21 +111,6 @@ def config_gen(config):
         ({"custom_reports": "[{\"name\": \"name\", \"dimensions\": [\"country\"], \"metrics\": [\"sessions\"], "
                             "\"limit\": \"1\", \"offset\": \"1.2\"}]"},
          Status.FAILED, '"custom_reports.0.offset: \'1.2\' does not match \'^[0-9]+$\'"'),
-        ({"custom_reports": "[{\"name\": \"name\", \"dimensions\": [\"country\"], \"metrics\": [\"sessions\"], "
-                            "\"dimensionFilter\": {\"filter\": {\"fieldName\": \"country\", \"stringFilter\":{\"value\":\"US\"}}}}]"},
-         Status.SUCCEEDED, None),
-        ({"custom_reports": "[{\"name\": \"name\", \"dimensions\": [\"country\"], \"metrics\": [\"sessions\"], "
-                            "\"dimensionFilter\": {\"filter\": {\"fieldNameWrong\": \"country\", \"stringFilter\":{\"value\":\"US\"}}}}]"},
-         Status.FAILED, '"custom_reports.0.dimensionFilter.filter: \'fieldName\' is a required property"'),
-        ({"custom_reports": "[{\"name\": \"name\", \"dimensions\": [\"country\"], \"metrics\": [\"sessions\"], \"dimensionFilter\": "
-                            "{\"filter\": {\"fieldName\": \"country\", \"inListFilter\":{\"values\":[\"US\", \"EU\"]}}}}]"},
-         Status.SUCCEEDED, None),
-        ({"custom_reports": "[{\"name\": \"name\", \"dimensions\": [\"country\"], \"metrics\": [\"sessions\"], \"dimensionFilter\": "
-                            "{\"filter\": {\"fieldName\": \"country\", \"inListFilter\":{\"value\":[\"US\", \"EU\"]}}}}]"},
-         Status.FAILED, '"custom_reports.0.dimensionFilter.filter.inListFilter: \'values\' is a required property"'),
-        ({"custom_reports": "[{\"name\": \"name\", \"dimensions\": [\"country\"], \"metrics\": [\"sessions\"], \"dimensionFilter\": "
-                            "{\"filter\": {\"fieldName\": \"country\", \"inListFilter\":{\"values\":\"US\"}}}}]"},
-         Status.FAILED, '"custom_reports.0.dimensionFilter.filter.inListFilter.values: \'US\' is not of type \'array\'"'),
     ],
 )
 def test_check(requests_mock, config_gen, config_values, status, message):
